@@ -1,4 +1,4 @@
-# 🛍️ Artisan Marketplace
+# 🛍️ KalaKriti: An Artisan Marketplace
 
 A complete, production-ready e-commerce platform connecting local artisans with customers. Built with modern web technologies and best practices.
 
