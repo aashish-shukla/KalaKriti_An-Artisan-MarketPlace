@@ -155,12 +155,15 @@ export const shopService = {
     apiClient.get<PaginatedApiResponse<Product>>(`/shops/${shopId}/products`, {
       params: params as Record<string, string | number | boolean>,
     }),
+
+  getShopAnalytics: (shopId: string) =>
+    apiClient.get<{ analytics: any }>(`/shops/${shopId}/analytics`),
 };
 
 // ─── Review Service ───────────────────────────────────────────
 export const reviewService = {
   getProductReviews: (productId: string, params?: { page?: number; limit?: number }) =>
-    apiClient.get<PaginatedApiResponse<Review>>(`/reviews/product/${productId}`, {
+    apiClient.get<PaginatedApiResponse<Review>>(`/products/${productId}/reviews`, {
       params: params as Record<string, string | number | boolean>,
     }),
 
@@ -214,10 +217,12 @@ export const userService = {
 
 // ─── Category Service ─────────────────────────────────────────
 export const categoryService = {
-  getCategories: (params?: { parent?: string }) =>
-    apiClient.get<Category[]>('/categories', {
+  getCategories: async (params?: { parent?: string }) => {
+    const response = await apiClient.get<{ categories: Category[] }>('/categories', {
       params: params as Record<string, string | number | boolean>,
-    }),
+    });
+    return (response as any).categories || response;
+  },
 
   getCategory: (id: string) =>
     apiClient.get<{ category: Category }>(`/categories/${id}`),

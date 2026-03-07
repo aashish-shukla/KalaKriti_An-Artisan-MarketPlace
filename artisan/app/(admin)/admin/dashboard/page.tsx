@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Users, Store, Package, ShoppingBag, DollarSign, TrendingUp } from 'lucide-react';
+import { Users, Store, Package, ShoppingBag, IndianRupee, TrendingUp } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -89,7 +89,7 @@ export default function AdminDashboardPage() {
         <div className="bg-white rounded-xl shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-              <DollarSign className="w-6 h-6 text-yellow-600" />
+              <IndianRupee className="w-6 h-6 text-yellow-600" />
             </div>
             <Badge variant="success">+22.3%</Badge>
           </div>

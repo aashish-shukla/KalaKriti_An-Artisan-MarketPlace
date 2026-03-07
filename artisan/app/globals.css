@@ -48,6 +48,131 @@
   --radius-2xl: 1.5rem;
 }
 
+/* ─── Dark Theme ───────────────────────────────────────────── */
+html.dark {
+  --background: #0f0f17;
+  --foreground: #e8e6e3;
+  --primary: #d4915f;
+  --primary-dark: #c2703e;
+  --primary-light: #e8b88a;
+  --secondary: #c9c5be;
+  --accent: #f0c75e;
+  --accent-light: #f5d98a;
+  --success: #3dbe88;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+  --cream: #1a1a24;
+  --stone: #252530;
+  --warm-gray: #9b9089;
+  --charcoal: #e8e6e3;
+
+  /* Gradients - Dark Mode */
+  --gradient-primary: linear-gradient(135deg, #d4915f 0%, #f0c75e 100%);
+  --gradient-hero: linear-gradient(135deg, #0f0f17 0%, #1a1a24 30%, #3a2818 70%, #d4915f 100%);
+  --gradient-warm: linear-gradient(135deg, #d4915f 0%, #f39c12 50%, #f0c75e 100%);
+  --gradient-sunset: linear-gradient(135deg, #d4915f 0%, #e8b88a 50%, #f5d98a 100%);
+  --gradient-ocean: linear-gradient(135deg, #1a1a24 0%, #252530 100%);
+  --gradient-dark: linear-gradient(135deg, #0f0f17 0%, #1a1a24 100%);
+  --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #f5d98a 50%, #f0c75e 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(26, 26, 36, 0.9) 0%, rgba(37, 37, 48, 0.7) 100%);
+
+  /* Shadows - Dark Mode */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.3), 0 12px 16px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 24px rgba(212, 145, 95, 0.2);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
+  --shadow-warm: 0 8px 32px rgba(212, 145, 95, 0.15);
+}
+
+/* Dark mode overrides for common elements */
+html.dark body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html.dark .bg-white {
+  background-color: #1a1a24 !important;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-\[\\#fdf8f4\] {
+  background-color: #0f0f17 !important;
+}
+
+html.dark .text-gray-900,
+html.dark .text-\[\\#2d3436\] {
+  color: #e8e6e3 !important;
+}
+
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-\[\\#6b5e54\] {
+  color: #9b9089 !important;
+}
+
+html.dark .text-gray-700 {
+  color: #b0a89f !important;
+}
+
+html.dark .text-gray-400 {
+  color: #6b6560 !important;
+}
+
+html.dark .border-gray-200,
+html.dark .border-gray-100,
+html.dark .border-gray-300,
+html.dark .border-\[\\#f0ebe4\] {
+  border-color: #2d2d3a !important;
+}
+
+html.dark .bg-gray-100 {
+  background-color: #252530 !important;
+}
+
+html.dark .bg-gray-200 {
+  background-color: #2d2d3a !important;
+}
+
+html.dark .hover\:bg-gray-50:hover {
+  background-color: #252530 !important;
+}
+
+html.dark .hover\:bg-gray-100:hover {
+  background-color: #2d2d3a !important;
+}
+
+html.dark .shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1a1a24;
+  border-color: #2d2d3a;
+  color: #e8e6e3;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #6b6560;
+}
+
+html.dark .bg-\[\\#faf6f1\] {
+  background-color: #1a1a24 !important;
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

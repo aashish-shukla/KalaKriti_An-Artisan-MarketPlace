@@ -48,9 +48,12 @@ export default function ProductsPage() {
     try {
       const response = await productService.searchProducts(filters);
       setProducts((response as any).data || []);
-      setPagination((response as any).pagination);
+      if ((response as any).pagination) {
+        setPagination((response as any).pagination);
+      }
     } catch (error) {
       console.error('Failed to fetch products:', error);
+      setProducts([]);
     } finally {
       setIsLoading(false);
     }
@@ -59,9 +62,12 @@ export default function ProductsPage() {
   const fetchCategories = async () => {
     try {
       const response = await categoryService.getCategories();
-      setCategories(response as Category[]);
+      // Ensure we always get an array
+      const cats = Array.isArray(response) ? response : [];
+      setCategories(cats);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
+      setCategories([]);
     }
   };
 
