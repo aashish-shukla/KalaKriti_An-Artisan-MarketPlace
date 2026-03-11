@@ -33,6 +33,9 @@ export const authService = {
     apiClient.post(`/auth/reset-password/${token}`, { password }),
 
   getMe: () => apiClient.get<{ user: User }>('/auth/me'),
+
+  changePassword: (currentPassword: string, newPassword: string) =>
+    apiClient.put<{ token: string }>('/auth/password', { currentPassword, newPassword }),
 };
 
 // ─── Product Service ──────────────────────────────────────────
@@ -213,6 +216,9 @@ export const userService = {
 
   removeFromWishlist: (productId: string) =>
     apiClient.delete(`/users/wishlist/${productId}`),
+
+  deleteAccount: (password: string) =>
+    apiClient.delete('/users/account', { body: JSON.stringify({ password }), headers: { 'Content-Type': 'application/json' } } as any),
 };
 
 // ─── Category Service ─────────────────────────────────────────

@@ -48,123 +48,337 @@
   --radius-2xl: 1.5rem;
 }
 
-/* ─── Dark Theme ───────────────────────────────────────────── */
+/* ─── Dark Theme — Neon Black ──────────────────────────────── */
 html.dark {
-  --background: #0f0f17;
-  --foreground: #e8e6e3;
-  --primary: #d4915f;
-  --primary-dark: #c2703e;
-  --primary-light: #e8b88a;
-  --secondary: #c9c5be;
-  --accent: #f0c75e;
-  --accent-light: #f5d98a;
-  --success: #3dbe88;
-  --danger: #e74c3c;
-  --warning: #f39c12;
-  --cream: #1a1a24;
-  --stone: #252530;
-  --warm-gray: #9b9089;
-  --charcoal: #e8e6e3;
+  --background: #09090b;
+  --foreground: #fafafa;
+  --primary: #e8944a;
+  --primary-dark: #d4915f;
+  --primary-light: #f0b87a;
+  --secondary: #d4d4d8;
+  --accent: #f5d06b;
+  --accent-light: #fae096;
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --cream: #111113;
+  --stone: #18181b;
+  --warm-gray: #a1a1aa;
+  --charcoal: #fafafa;
 
-  /* Gradients - Dark Mode */
-  --gradient-primary: linear-gradient(135deg, #d4915f 0%, #f0c75e 100%);
-  --gradient-hero: linear-gradient(135deg, #0f0f17 0%, #1a1a24 30%, #3a2818 70%, #d4915f 100%);
-  --gradient-warm: linear-gradient(135deg, #d4915f 0%, #f39c12 50%, #f0c75e 100%);
-  --gradient-sunset: linear-gradient(135deg, #d4915f 0%, #e8b88a 50%, #f5d98a 100%);
-  --gradient-ocean: linear-gradient(135deg, #1a1a24 0%, #252530 100%);
-  --gradient-dark: linear-gradient(135deg, #0f0f17 0%, #1a1a24 100%);
-  --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #f5d98a 50%, #f0c75e 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(26, 26, 36, 0.9) 0%, rgba(37, 37, 48, 0.7) 100%);
+  /* Gradients - Neon Black */
+  --gradient-primary: linear-gradient(135deg, #e8944a 0%, #f5d06b 100%);
+  --gradient-hero: linear-gradient(135deg, #09090b 0%, #111113 25%, #2a1a0e 65%, #e8944a 100%);
+  --gradient-warm: linear-gradient(135deg, #e8944a 0%, #fbbf24 50%, #f5d06b 100%);
+  --gradient-sunset: linear-gradient(135deg, #e8944a 0%, #f0b87a 50%, #fae096 100%);
+  --gradient-ocean: linear-gradient(135deg, #111113 0%, #18181b 100%);
+  --gradient-dark: linear-gradient(135deg, #09090b 0%, #111113 100%);
+  --gradient-gold: linear-gradient(135deg, #f5d06b 0%, #fae096 50%, #f5d06b 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(17, 17, 19, 0.92) 0%, rgba(24, 24, 27, 0.8) 100%);
 
-  /* Shadows - Dark Mode */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.3), 0 12px 16px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 24px rgba(212, 145, 95, 0.2);
-  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
-  --shadow-warm: 0 8px 32px rgba(212, 145, 95, 0.15);
+  /* Shadows - Neon Glow */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 8px rgba(232, 148, 74, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 16px rgba(232, 148, 74, 0.06);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 24px rgba(232, 148, 74, 0.06);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(232, 148, 74, 0.08);
+  --shadow-glow: 0 0 30px rgba(232, 148, 74, 0.25), 0 0 60px rgba(232, 148, 74, 0.1);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 1px rgba(232, 148, 74, 0.1);
+  --shadow-warm: 0 8px 32px rgba(232, 148, 74, 0.18);
 }
 
-/* Dark mode overrides for common elements */
+/* ─── Neon Black: Base Overrides ───────────────────────────── */
 html.dark body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #09090b;
+  color: #fafafa;
 }
 
+/* ── Backgrounds ──────────────────────────────────────────── */
 html.dark .bg-white {
-  background-color: #1a1a24 !important;
+  background-color: #111113 !important;
 }
 
-html.dark .bg-gray-50,
-html.dark .bg-\[\\#fdf8f4\] {
-  background-color: #0f0f17 !important;
+html.dark .bg-gray-50 {
+  background-color: #09090b !important;
 }
 
+html.dark [class*="bg-[#fdf8f4]"] {
+  background-color: #09090b !important;
+}
+
+html.dark [class*="bg-[#faf6f1]"] {
+  background-color: #0d0d0f !important;
+}
+
+html.dark .bg-gray-100 {
+  background-color: #18181b !important;
+}
+
+html.dark .bg-gray-200 {
+  background-color: #1f1f23 !important;
+}
+
+html.dark .bg-red-50 {
+  background-color: rgba(248, 113, 113, 0.1) !important;
+}
+
+html.dark .hover\:bg-red-50:hover {
+  background-color: rgba(248, 113, 113, 0.15) !important;
+}
+
+html.dark .hover\:bg-red-100:hover {
+  background-color: rgba(248, 113, 113, 0.2) !important;
+}
+
+html.dark .hover\:bg-gray-50:hover {
+  background-color: #18181b !important;
+}
+
+html.dark .hover\:bg-gray-100:hover {
+  background-color: #1f1f23 !important;
+}
+
+/* Category cards & light gradients */
+html.dark [class*="from-[#faf6f1]"][class*="to-white"] {
+  background: linear-gradient(to bottom right, #111113, #18181b) !important;
+}
+
+html.dark [class*="from-[#faf6f1]"][class*="to-[#f0ebe4]"] {
+  background: linear-gradient(to bottom right, #111113, #0d0d0f) !important;
+}
+
+/* Testimonials section background */
+html.dark [class*="from-[#faf6f1]"][class*="via-white"][class*="to-[#f0ebe4]"] {
+  background: linear-gradient(to bottom right, #0d0d0f, #09090b, #0d0d0f) !important;
+}
+
+/* Decorative background blobs in dark mode - more subtle */
+html.dark [class*="from-[#c2703e]"][class*="to-[#daa520]"] > [class*="bg-gradient-to-br"][class*="from-[#c2703e]"] {
+  opacity: 0.15;
+}
+
+/* ── Text Colors ──────────────────────────────────────────── */
 html.dark .text-gray-900,
-html.dark .text-\[\\#2d3436\] {
-  color: #e8e6e3 !important;
+html.dark [class*="text-[#2d3436]"] {
+  color: #fafafa !important;
+}
+
+html.dark .text-gray-800 {
+  color: #e4e4e7 !important;
+}
+
+html.dark .text-gray-700 {
+  color: #d4d4d8 !important;
 }
 
 html.dark .text-gray-600,
 html.dark .text-gray-500,
-html.dark .text-\[\\#6b5e54\] {
-  color: #9b9089 !important;
-}
-
-html.dark .text-gray-700 {
-  color: #b0a89f !important;
+html.dark [class*="text-[#6b5e54]"] {
+  color: #a1a1aa !important;
 }
 
 html.dark .text-gray-400 {
-  color: #6b6560 !important;
+  color: #71717a !important;
 }
 
+html.dark .text-gray-300 {
+  color: #a1a1aa !important;
+}
+
+/* ── Borders ──────────────────────────────────────────────── */
 html.dark .border-gray-200,
 html.dark .border-gray-100,
 html.dark .border-gray-300,
-html.dark .border-\[\\#f0ebe4\] {
-  border-color: #2d2d3a !important;
+html.dark [class*="border-[#f0ebe4]"] {
+  border-color: rgba(232, 148, 74, 0.12) !important;
 }
 
-html.dark .bg-gray-100 {
-  background-color: #252530 !important;
+html.dark [class*="border-[#f0ebe4]/80"] {
+  border-color: rgba(232, 148, 74, 0.1) !important;
 }
 
-html.dark .bg-gray-200 {
-  background-color: #2d2d3a !important;
+html.dark .border-white\/5 {
+  border-color: rgba(232, 148, 74, 0.08) !important;
 }
 
-html.dark .hover\:bg-gray-50:hover {
-  background-color: #252530 !important;
-}
-
-html.dark .hover\:bg-gray-100:hover {
-  background-color: #2d2d3a !important;
-}
-
+/* ── Shadows & Glows ─────────────────────────────────────── */
 html.dark .shadow-sm {
-  box-shadow: var(--shadow-sm) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 6px rgba(232, 148, 74, 0.04) !important;
 }
 
+html.dark .shadow-md {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 12px rgba(232, 148, 74, 0.05) !important;
+}
+
+html.dark .shadow-lg {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(232, 148, 74, 0.06) !important;
+}
+
+html.dark .shadow-xl,
+html.dark .shadow-2xl {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5), 0 0 30px rgba(232, 148, 74, 0.08) !important;
+}
+
+/* ── Card Hover — Neon Glow ──────────────────────────────── */
+html.dark .card-hover:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(232, 148, 74, 0.12) !important;
+}
+
+/* ── Forms & Inputs ──────────────────────────────────────── */
 html.dark input,
 html.dark textarea,
 html.dark select {
-  background-color: #1a1a24;
-  border-color: #2d2d3a;
-  color: #e8e6e3;
+  background-color: #111113;
+  border-color: rgba(232, 148, 74, 0.12);
+  color: #fafafa;
 }
 
 html.dark input::placeholder,
 html.dark textarea::placeholder {
-  color: #6b6560;
+  color: #52525b;
 }
 
-html.dark .bg-\[\\#faf6f1\] {
-  background-color: #1a1a24 !important;
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  border-color: #e8944a !important;
+  box-shadow: 0 0 0 3px rgba(232, 148, 74, 0.15), 0 0 16px rgba(232, 148, 74, 0.1) !important;
 }
 
-/* Smooth theme transition */
+/* ── Header & Navbar ─────────────────────────────────────── */
+html.dark .warm-glass {
+  background: rgba(17, 17, 19, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-color: rgba(232, 148, 74, 0.1) !important;
+}
+
+html.dark .glass {
+  background: rgba(17, 17, 19, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-color: rgba(232, 148, 74, 0.08) !important;
+}
+
+html.dark .glass-dark {
+  background: rgba(9, 9, 11, 0.9) !important;
+  border-color: rgba(232, 148, 74, 0.1) !important;
+}
+
+/* Header non-scrolled state */
+html.dark header.bg-white\/95 {
+  background-color: rgba(9, 9, 11, 0.95) !important;
+}
+
+/* Dropdown menus */
+html.dark .bg-white.rounded-2xl.shadow-2xl {
+  background-color: #111113 !important;
+  border-color: rgba(232, 148, 74, 0.12) !important;
+}
+
+/* ── Search Bar ──────────────────────────────────────────── */
+html.dark [class*="bg-[#f0ebe4]"] {
+  background-color: rgba(24, 24, 27, 0.8) !important;
+}
+
+html.dark input.focus\:bg-white:focus {
+  background-color: #18181b !important;
+}
+
+/* Search suggestions dropdown */
+html.dark .bg-white.rounded-2xl.max-h-96 {
+  background-color: #111113 !important;
+}
+
+html.dark [class*="hover:bg-[#faf6f1]"]:hover {
+  background-color: #18181b !important;
+}
+
+/* Hover overrides for warm-accent backgrounds */
+html.dark [class*="hover:bg-[#c2703e]"]:hover {
+  background-color: rgba(232, 148, 74, 0.08) !important;
+}
+
+/* ── Mobile Menu Panel ───────────────────────────────────── */
+html.dark [class*="bg-[#fdf8f4]"] {
+  background-color: #0d0d0f !important;
+}
+
+/* Mobile menu backdrop */
+html.dark [class*="bg-[#1a1a2e]"] {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ── Product Card ────────────────────────────────────────── */
+html.dark [class*="from-[#f0ebe4]"][class*="to-[#faf6f1]"] {
+  background: linear-gradient(to bottom right, #18181b, #111113) !important;
+}
+
+/* Quick view overlay on product cards */
+html.dark .bg-white\/95.backdrop-blur-sm.rounded-xl {
+  background-color: rgba(17, 17, 19, 0.95) !important;
+  border-color: rgba(232, 148, 74, 0.12) !important;
+}
+
+/* Wishlist button on cards */
+html.dark .bg-white\/95.backdrop-blur-sm.rounded-full {
+  background-color: rgba(17, 17, 19, 0.95) !important;
+}
+
+/* Save badge */
+html.dark .bg-red-50 {
+  background-color: rgba(248, 113, 113, 0.1) !important;
+}
+
+/* ── Scrollbar — Neon ────────────────────────────────────── */
+html.dark ::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e8944a, #f5d06b);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d4915f, #e8944a);
+}
+
+/* ── Selection — Neon ────────────────────────────────────── */
+html.dark ::selection {
+  background: rgba(232, 148, 74, 0.25);
+  color: #fafafa;
+}
+
+/* ── Focus States — Neon Ring ────────────────────────────── */
+html.dark *:focus-visible {
+  outline-color: #e8944a;
+}
+
+/* ── Section Divider SVG ─────────────────────────────────── */
+html.dark .section-divider::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%2309090b' d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") !important;
+}
+
+/* ── Footer (already dark, deepen it) ────────────────────── */
+html.dark [class*="bg-[#1a1a2e]"] {
+  background-color: #09090b !important;
+}
+
+html.dark footer .border-white\/5 {
+  border-color: rgba(232, 148, 74, 0.08) !important;
+}
+
+html.dark footer .bg-white\/5 {
+  background-color: rgba(232, 148, 74, 0.06) !important;
+}
+
+/* ── Skeleton/Loading — Neon Shimmer ─────────────────────── */
+html.dark .animate-shimmer,
+html.dark .skeleton {
+  background: linear-gradient(90deg, #18181b 25%, #1f1f23 50%, #18181b 75%) !important;
+  background-size: 200% 100% !important;
+}
+
+/* ── Smooth Theme Transition ─────────────────────────────── */
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
