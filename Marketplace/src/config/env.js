@@ -1,14 +1,22 @@
 require('dotenv').config();
 
+const defaultLocalMongoUri = 'mongodb://127.0.0.1:27017/artisan-marketplace';
+const primaryMongoUri = process.env.NODE_ENV === 'test'
+  ? process.env.MONGODB_URI_TEST
+  : process.env.MONGODB_URI;
+const fallbackMongoUri = process.env.MONGODB_URI_LOCAL || defaultLocalMongoUri;
+
 module.exports = {
   nodeEnv: process.env.NODE_ENV || 'development',
   port: process.env.PORT || 5000,
   apiVersion: process.env.API_VERSION || 'v1',
   
   mongodb: {
-    uri: process.env.NODE_ENV === 'test' 
-      ? process.env.MONGODB_URI_TEST 
-      : process.env.MONGODB_URI,
+    uri: primaryMongoUri,
+    fallbackUri: fallbackMongoUri,
+    getConnectionUris() {
+      return [primaryMongoUri, fallbackMongoUri].filter((uri, index, uris) => Boolean(uri) && uris.indexOf(uri) === index);
+    },
   },
   
   jwt: {

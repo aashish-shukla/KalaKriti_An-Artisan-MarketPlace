@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { Star, MapPin, Package, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useTranslation } from '@/lib/i18n';
 
 const featuredShops = [
   {
@@ -45,6 +46,7 @@ const featuredShops = [
 ];
 
 export function FeaturedShops() {
+  const { t } = useTranslation();
   return (
     <section className="py-20 bg-[#faf6f1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,18 +55,18 @@ export function FeaturedShops() {
           <div>
             <div className="inline-flex items-center gap-2 bg-[#c2703e]/10 rounded-full px-4 py-2 mb-4">
               <Package className="w-4 h-4 text-[#c2703e]" />
-              <span className="text-sm font-semibold text-[#c2703e] uppercase tracking-wider">Featured Shops</span>
+              <span className="text-sm font-semibold text-[#c2703e] uppercase tracking-wider">{t('home.featuredShops')}</span>
             </div>
             <h2 className="text-4xl font-bold text-[#2d3436] mb-2" style={{ fontFamily: 'var(--font-serif)' }}>
-              Meet Our Top Artisans
+              {t('home.featuredShops')}
             </h2>
             <p className="text-lg text-[#6b5e54]">
-              Discover talented creators and their amazing collections
+              {t('home.featuredShopsDesc')}
             </p>
           </div>
           <Link href="/shops" className="hidden md:block">
             <Button variant="outline">
-              View All Shops
+              {t('common.viewAll')}
               <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
@@ -116,7 +118,7 @@ export function FeaturedShops() {
                     </div>
                     <div className="flex items-center gap-1 text-[#6b5e54]">
                       <Package className="w-4 h-4" />
-                      <span>{shop.products} items</span>
+                      <span>{t('home.productsCount', { count: shop.products })}</span>
                     </div>
                   </div>
 

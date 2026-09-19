@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/lib/store/cartStore';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from '@/lib/i18n';
 
 interface ProductCardProps {
   product: Product;
@@ -20,6 +21,7 @@ interface ProductCardProps {
 export function ProductCard({ product, onWishlistToggle, isInWishlist }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const { t } = useTranslation();
 
   const primaryImage = product.images?.find((img) => img.isPrimary) || product.images?.[0];
   const discount = calculateDiscount(product.price, product.compareAtPrice);
@@ -31,9 +33,9 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist }: Product
     setIsAddingToCart(true);
     try {
       await addItem(product, 1);
-      toast.success('Added to cart!');
+      toast.success(t('common.addedToCart'));
     } catch (error) {
-      toast.error('Failed to add to cart');
+      toast.error(t('common.addToCartFail'));
     } finally {
       setIsAddingToCart(false);
     }
@@ -65,22 +67,22 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist }: Product
           <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
             {product.featured && (
               <span className="text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm" style={{ background: 'linear-gradient(135deg, #daa520 0%, #c2703e 100%)' }}>
-                ✨ Featured
+                ✨ {t('common.featured')}
               </span>
             )}
             {discount > 0 && (
               <span className="bg-gradient-to-r from-[#c0392b] to-[#e74c3c] text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
-                {discount}% OFF
+                {discount}% {t('common.off')}
               </span>
             )}
             {product.inventory?.stock === 0 && (
               <span className="bg-[#2d3436]/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-                Out of Stock
+                {t('common.outOfStock')}
               </span>
             )}
             {product.inventory?.stock > 0 && product.inventory?.stock <= product.inventory?.lowStockThreshold && (
               <span className="bg-[#e67e22]/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-                Only {product.inventory.stock} left!
+                {t('common.onlyLeft', { count: product.inventory.stock })}
               </span>
             )}
           </div>
@@ -159,7 +161,7 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist }: Product
                   {formatPrice(product.compareAtPrice)}
                 </span>
                 <span className="text-xs font-semibold text-[#c0392b] bg-red-50 px-2 py-0.5 rounded-full">
-                  Save {formatPrice(product.compareAtPrice - product.price)}
+                  {t('common.save_amount', { amount: formatPrice(product.compareAtPrice - product.price) })}
                 </span>
               </>
             )}
@@ -175,7 +177,7 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist }: Product
             variant={product.inventory?.stock === 0 ? 'secondary' : 'primary'}
           >
             <ShoppingCart className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
-            {product.inventory?.stock === 0 ? 'Out of Stock' : isAddingToCart ? 'Adding...' : 'Add to Cart'}
+            {product.inventory?.stock === 0 ? t('common.outOfStock') : isAddingToCart ? t('common.adding') : t('common.addToCart')}
           </Button>
         </div>
       </div>

@@ -3,11 +3,14 @@
 
 import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
-import { IndianRupee, ShoppingBag, Package, TrendingUp, Eye, Star, AlertCircle } from 'lucide-react';
+import { IndianRupee, ShoppingBag, Package, TrendingUp, Eye, Star, AlertCircle, Store } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { useAuthStore } from '@/lib/store/authStore';
 import { shopService, orderService, productService } from '@/lib/api/services';
+import toast from 'react-hot-toast';
 import type { Order, Product } from '@/types';
 
 interface DashboardStats {
@@ -19,10 +22,13 @@ interface DashboardStats {
 }
 
 export default function SellerDashboardPage() {
-  const { user } = useAuthStore();
+  const { user, checkAuth } = useAuthStore();
   const [timeRange, setTimeRange] = useState('7d');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isCreatingShop, setIsCreatingShop] = useState(false);
+  const [shopName, setShopName] = useState('');
+  const [shopDescription, setShopDescription] = useState('');
   const [stats, setStats] = useState<DashboardStats>({
     totalRevenue: 0,
     totalOrders: 0,
@@ -100,13 +106,67 @@ export default function SellerDashboardPage() {
     return variants[status] || 'default';
   };
 
+  const handleCreateShop = async () => {
+    if (!shopName.trim() || !shopDescription.trim()) {
+      toast.error('Please fill in shop name and description');
+      return;
+    }
+    setIsCreatingShop(true);
+    try {
+      await shopService.createShop({
+        name: shopName.trim(),
+        description: shopDescription.trim(),
+      } as any);
+      toast.success('Shop created successfully!');
+      // Refresh user to get updated shop reference
+      if (checkAuth) await checkAuth();
+      window.location.reload();
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create shop');
+    } finally {
+      setIsCreatingShop(false);
+    }
+  };
+
   if (!shopId) {
     return (
       <div className="space-y-6">
-        <div className="bg-white rounded-xl shadow-sm p-12 text-center">
-          <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-gray-900 mb-2">No Shop Found</h2>
-          <p className="text-gray-600">You need to create a shop before accessing the dashboard.</p>
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+          <p className="text-gray-600 mt-1">Set up your shop to get started</p>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-8 max-w-xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <Store className="w-6 h-6 text-indigo-600" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-gray-900">Create Your Shop</h2>
+              <p className="text-sm text-gray-600">Set up your artisan shop to start selling</p>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <Input
+              label="Shop Name *"
+              value={shopName}
+              onChange={(e) => setShopName(e.target.value)}
+              placeholder="e.g. Ceramic Dreams Studio"
+            />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Description *</label>
+              <textarea
+                value={shopDescription}
+                onChange={(e) => setShopDescription(e.target.value)}
+                placeholder="Tell buyers about your craft and what makes your products special..."
+                rows={3}
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none transition-all"
+              />
+            </div>
+            <Button onClick={handleCreateShop} isLoading={isCreatingShop} size="lg" className="w-full">
+              <Store className="w-5 h-5" />
+              Create Shop
+            </Button>
+          </div>
         </div>
       </div>
     );

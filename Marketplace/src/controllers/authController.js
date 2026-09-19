@@ -37,7 +37,7 @@ exports.register = async (req, res, next) => {
         owner: user._id,
         name: req.body.shopDetails.name,
         description: req.body.shopDetails.description,
-        status: SHOP_STATUS.PENDING_APPROVAL,
+        status: SHOP_STATUS.ACTIVE,
       });
       user.shop = shop._id;
       await user.save();

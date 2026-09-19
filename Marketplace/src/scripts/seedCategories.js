@@ -4,6 +4,7 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 const Category = require('../models/Category');
+const config = require('../config/env');
 
 const categories = [
   {
@@ -70,7 +71,7 @@ const categories = [
 
 async function seedCategories() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(config.mongodb.uri || config.mongodb.fallbackUri);
     console.log('Connected to MongoDB');
 
     // Check existing categories

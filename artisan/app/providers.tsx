@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useThemeStore } from '@/lib/store/themeStore';
 import { useSocket } from '@/lib/hooks/useSocket';
+import { LanguageProvider } from '@/lib/i18n';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -83,7 +84,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ThemeProvider>
-          <SocketProvider>
+          <LanguageProvider>
+           <SocketProvider>
             {children}
             <Toaster
               position="top-right"
@@ -109,7 +111,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 },
               }}
             />
-          </SocketProvider>
+           </SocketProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>

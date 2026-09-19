@@ -9,6 +9,7 @@ import type { Product } from '@/types';
 import Image from 'next/image';
 import { formatPrice, getImageUrl } from '@/lib/utils';
 import { useDebounce } from '@/lib/hooks/useDebounce';
+import { useTranslation } from '@/lib/i18n';
 
 export function SearchBar() {
   const [query, setQuery] = useState('');
@@ -17,6 +18,7 @@ export function SearchBar() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const debouncedQuery = useDebounce(query, 300);
 
@@ -77,7 +79,7 @@ export function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => query.length >= 2 && setIsOpen(true)}
-          placeholder="Search handcrafted products..."
+          placeholder={t('search.placeholder')}
           className="w-full pl-11 pr-11 py-2.5 bg-[#f0ebe4]/50 border border-[#f0ebe4] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#c2703e]/15 focus:border-[#c2703e]/40 focus:bg-white text-sm placeholder:text-[#6b5e54]/50 transition-all duration-300"
         />
         {query && (
@@ -95,11 +97,11 @@ export function SearchBar() {
       {isOpen && (query.length >= 2 || suggestions.length > 0) && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-[#f0ebe4] max-h-96 overflow-y-auto z-50 animate-fade-in-up" style={{ animationDuration: '0.15s' }}>
           {isLoading ? (
-            <div className="p-4 text-center text-[#6b5e54]">Searching...</div>
+            <div className="p-4 text-center text-[#6b5e54]">{t('search.searching')}</div>
           ) : suggestions.length > 0 ? (
             <>
               <div className="p-2">
-                <p className="text-xs text-[#6b5e54] px-3 py-2 font-medium uppercase tracking-wider">Products</p>
+                <p className="text-xs text-[#6b5e54] px-3 py-2 font-medium uppercase tracking-wider">{t('common.products')}</p>
                 {suggestions.map((product) => (
                   <a
                     key={product._id}
@@ -130,12 +132,12 @@ export function SearchBar() {
                   }}
                   className="w-full text-center text-sm text-[#c2703e] font-medium py-2 hover:bg-[#faf6f1] rounded-xl transition-colors"
                 >
-                  View all results for &ldquo;{query}&rdquo;
+                  {t('search.viewAllResults', { query })}
                 </button>
               </div>
             </>
           ) : (
-            <div className="p-4 text-center text-[#6b5e54]">No products found</div>
+            <div className="p-4 text-center text-[#6b5e54]">{t('search.noProducts')}</div>
           )}
         </div>
       )}

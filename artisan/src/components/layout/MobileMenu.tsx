@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { X, Home, ShoppingBag, User, Heart, Package, Settings, LogOut, ChevronRight, Compass } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from '@/lib/i18n';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ interface MobileMenuProps {
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const router = useRouter();
   const { user, isAuthenticated, logout } = useAuthStore();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isOpen) {
@@ -34,16 +36,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   };
 
   const menuItems = [
-    { label: 'Home', href: '/', icon: Home },
-    { label: 'Products', href: '/products', icon: ShoppingBag },
-    { label: 'Explore', href: '/products?featured=true', icon: Compass },
+    { label: t('nav.home'), href: '/', icon: Home },
+    { label: t('nav.products'), href: '/products', icon: ShoppingBag },
+    { label: t('nav.explore'), href: '/products?featured=true', icon: Compass },
   ];
 
   const userMenuItems = isAuthenticated
     ? [
-      { label: 'My Orders', href: '/account/orders', icon: Package },
-      { label: 'Wishlist', href: '/account/wishlist', icon: Heart },
-      { label: 'Account Settings', href: '/account', icon: Settings },
+      { label: t('nav.myOrders'), href: '/account/orders', icon: Package },
+      { label: t('nav.wishlist'), href: '/account/wishlist', icon: Heart },
+      { label: t('nav.accountSettings'), href: '/account', icon: Settings },
     ]
     : [];
 
@@ -98,14 +100,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
           ) : (
             <div className="p-4 border-b border-[#f0ebe4] bg-gradient-to-br from-[#c2703e]/5 to-[#daa520]/5">
-              <p className="text-sm text-[#6b5e54] mb-3">Sign in to access your account</p>
+              <p className="text-sm text-[#6b5e54] mb-3">{t('nav.signInPrompt')}</p>
               <div className="flex gap-2">
                 <Link
                   href="/login"
                   className="flex-1 text-center py-2.5 px-4 bg-white border border-[#c2703e]/30 text-[#c2703e] rounded-xl font-medium hover:bg-[#c2703e]/5 transition-colors"
                   onClick={onClose}
                 >
-                  Log In
+                  {t('nav.logIn')}
                 </Link>
                 <Link
                   href="/register"
@@ -113,7 +115,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   style={{ background: 'var(--gradient-primary)' }}
                   onClick={onClose}
                 >
-                  Sign Up
+                  {t('nav.signUp')}
                 </Link>
               </div>
             </div>
@@ -144,7 +146,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             {isAuthenticated && userMenuItems.length > 0 && (
               <>
                 <div className="px-4 py-3 mt-4">
-                  <p className="text-xs font-semibold text-[#6b5e54] uppercase tracking-wider">My Account</p>
+                  <p className="text-xs font-semibold text-[#6b5e54] uppercase tracking-wider">{t('nav.myAccount')}</p>
                 </div>
                 <div className="px-2">
                   {userMenuItems.map((item) => {
@@ -177,7 +179,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-50 text-[#c0392b] rounded-xl font-medium hover:bg-red-100 transition-colors"
               >
                 <LogOut className="w-5 h-5" />
-                Log Out
+                {t('nav.logOut')}
               </button>
             </div>
           )}

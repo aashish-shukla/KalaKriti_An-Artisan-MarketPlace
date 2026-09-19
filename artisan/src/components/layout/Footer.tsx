@@ -1,33 +1,9 @@
 // artisan/src/components/layout/Footer.tsx
+'use client';
+
 import Link from 'next/link';
 import { Heart, Mail, MapPin, Phone } from 'lucide-react';
-
-const footerLinks = {
-  shop: [
-    { label: 'All Products', href: '/products' },
-    { label: 'Featured', href: '/products?featured=true' },
-    { label: 'New Arrivals', href: '/products?sort=-createdAt' },
-    { label: 'Best Sellers', href: '/products?sort=-sales.count' },
-  ],
-  support: [
-    { label: 'Help Center', href: '/help' },
-    { label: 'Shipping Info', href: '/shipping' },
-    { label: 'Returns', href: '/returns' },
-    { label: 'Contact Us', href: '/contact' },
-  ],
-  sellOnKalaKriti: [
-    { label: 'Become a Seller', href: '/register' },
-    { label: 'Seller Dashboard', href: '/seller/dashboard' },
-    { label: 'Seller Guide', href: '/seller-guide' },
-    { label: 'Success Stories', href: '/stories' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
-    { label: 'Cookie Policy', href: '/cookies' },
-    { label: 'Refund Policy', href: '/refunds' },
-  ],
-};
+import { useTranslation } from '@/lib/i18n';
 
 const socialLinks = [
   { name: 'Twitter', href: '#', icon: 'X' },
@@ -37,6 +13,35 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
+
+  const footerLinks = {
+    shop: [
+      { label: t('footer.allProducts'), href: '/products' },
+      { label: t('footer.featured'), href: '/products?featured=true' },
+      { label: t('footer.newArrivals'), href: '/products?sort=-createdAt' },
+      { label: t('footer.bestSellers'), href: '/products?sort=-sales.count' },
+    ],
+    support: [
+      { label: t('footer.helpCenter'), href: '/help' },
+      { label: t('footer.shippingInfo'), href: '/shipping' },
+      { label: t('footer.returns'), href: '/returns' },
+      { label: t('footer.contactUs'), href: '/contact' },
+    ],
+    sellOnKalaKriti: [
+      { label: t('footer.becomeASeller'), href: '/register' },
+      { label: t('footer.sellerDashboard'), href: '/seller/dashboard' },
+      { label: t('footer.sellerGuide'), href: '/seller-guide' },
+      { label: t('footer.successStories'), href: '/stories' },
+    ],
+    legal: [
+      { label: t('footer.privacyPolicy'), href: '/privacy' },
+      { label: t('footer.termsOfService'), href: '/terms' },
+      { label: t('footer.cookiePolicy'), href: '/cookies' },
+      { label: t('footer.refundPolicy'), href: '/refunds' },
+    ],
+  };
+
   return (
     <footer className="bg-[#1a1a2e] text-gray-300 relative overflow-hidden">
       {/* Decorative top border */}
@@ -57,7 +62,7 @@ export function Footer() {
               <span className="font-bold text-2xl text-white" style={{ fontFamily: 'var(--font-display)' }}>KalaKriti</span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-6">
-              Discover unique handcrafted products from talented artisans. Every purchase supports independent creators and sustainable craftsmanship.
+              {t('footer.description')}
             </p>
 
             {/* Contact Info */}
@@ -93,7 +98,7 @@ export function Footer() {
 
           {/* Shop */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Shop</h3>
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">{t('footer.shop')}</h3>
             <ul className="space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.label}>
@@ -107,7 +112,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Support</h3>
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">{t('footer.support')}</h3>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.label}>
@@ -121,7 +126,7 @@ export function Footer() {
 
           {/* Sell */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Sell</h3>
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">{t('footer.sell')}</h3>
             <ul className="space-y-3">
               {footerLinks.sellOnKalaKriti.map((link) => (
                 <li key={link.label}>
@@ -135,7 +140,7 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Legal</h3>
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">{t('footer.legal')}</h3>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
@@ -154,10 +159,10 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500 text-center md:text-left">
-              © {new Date().getFullYear()} KalaKriti. All rights reserved.
+              {t('footer.copyright', { year: String(new Date().getFullYear()) })}
             </p>
             <p className="flex items-center gap-1 text-sm text-gray-500">
-              Made with <Heart className="w-4 h-4 text-[#c2703e] fill-[#c2703e] animate-pulse" /> for artisans worldwide
+              {t('footer.madeWith')} <Heart className="w-4 h-4 text-[#c2703e] fill-[#c2703e] animate-pulse" /> {t('footer.forArtisans')}
             </p>
           </div>
         </div>

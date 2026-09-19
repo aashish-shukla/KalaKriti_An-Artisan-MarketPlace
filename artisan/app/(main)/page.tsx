@@ -10,12 +10,14 @@ import Link from 'next/link';
 import { ArrowRight, Sparkles, TrendingUp, Star, ShoppingBag, Palette, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import type { Product, Category } from '@/types';
+import { useTranslation } from '@/lib/i18n';
 
 export default function HomePage() {
   const [featured, setFeatured] = useState<Product[]>([]);
   const [trending, setTrending] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function loadData() {
@@ -74,28 +76,28 @@ export default function HomePage() {
           <div className="max-w-3xl animate-fade-in-up">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 mb-8 border border-white/10">
               <Sparkles className="w-4 h-4 text-[#daa520]" />
-              <span className="text-sm font-medium text-white/80 tracking-wide">Handcrafted with Passion</span>
+              <span className="text-sm font-medium text-white/80 tracking-wide">{t('home.heroTag')}</span>
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white leading-[1.1]" style={{ fontFamily: 'var(--font-serif)' }}>
-              Discover Unique{' '}
+              {t('home.heroTitle1')}{' '}
               <span className="relative inline-block">
                 <span className="text-shimmer">KalaKriti</span>
               </span>{' '}
-              Treasures
+              {t('home.heroTitle2')}
             </h1>
             <p className="text-xl sm:text-2xl mb-10 text-white/70 leading-relaxed max-w-2xl font-light">
-              Support local artisans and find one-of-a-kind products made with passion, skill, and sustainable materials.
+              {t('home.heroSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/products">
                 <Button size="lg" className="bg-white text-[#c2703e] hover:bg-[#faf6f1] shadow-xl hover:shadow-2xl transition-all duration-300 text-base font-semibold px-8 border-0">
-                  Explore Products
+                  {t('home.exploreProducts')}
                   <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
               <Link href="/register">
                 <Button size="lg" variant="outline" className="border-2 border-white/20 text-white hover:bg-white/10 backdrop-blur-sm text-base px-8">
-                  Become a Seller
+                  {t('home.becomeASeller')}
                 </Button>
               </Link>
             </div>
@@ -104,9 +106,9 @@ export default function HomePage() {
           {/* Stats */}
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-xl animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             {[
-              { value: '2K+', label: 'Artisans' },
-              { value: '10K+', label: 'Products' },
-              { value: '50K+', label: 'Happy Buyers' },
+              { value: '2K+', label: t('home.artisans') },
+              { value: '10K+', label: t('common.products') },
+              { value: '50K+', label: t('home.happyBuyers') },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="text-3xl font-bold text-white">{stat.value}</p>
@@ -122,11 +124,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-[#2d3436]" style={{ fontFamily: 'var(--font-serif)' }}>Shop by Category</h2>
-              <p className="text-[#6b5e54] mt-2">Browse our curated collections</p>
+              <h2 className="text-3xl font-bold text-[#2d3436]" style={{ fontFamily: 'var(--font-serif)' }}>{t('home.shopByCategory')}</h2>
+              <p className="text-[#6b5e54] mt-2">{t('home.browseCurated')}</p>
             </div>
             <Link href="/products" className="text-[#c2703e] hover:text-[#a85a30] font-medium flex items-center gap-1 group">
-              View All
+              {t('common.viewAll')}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -177,12 +179,12 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Star className="w-5 h-5 text-[#daa520] fill-[#daa520]" />
-                <span className="text-sm font-semibold text-[#daa520] uppercase tracking-wider">Hand-picked</span>
+                <span className="text-sm font-semibold text-[#daa520] uppercase tracking-wider">{t('home.handPicked')}</span>
               </div>
-              <h2 className="text-3xl font-bold text-[#2d3436]" style={{ fontFamily: 'var(--font-serif)' }}>Featured Products</h2>
+              <h2 className="text-3xl font-bold text-[#2d3436]" style={{ fontFamily: 'var(--font-serif)' }}>{t('home.featuredProducts')}</h2>
             </div>
             <Link href="/products?featured=true" className="text-[#c2703e] hover:text-[#a85a30] font-medium flex items-center gap-1 group">
-              View All
+              {t('common.viewAll')}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -207,7 +209,7 @@ export default function HomePage() {
           ) : (
             <div className="text-center py-12 text-[#6b5e54]">
               <ShoppingBag className="w-12 h-12 mx-auto mb-4 text-[#f0ebe4]" />
-              <p>No featured products available yet</p>
+              <p>{t('home.noFeaturedProducts')}</p>
             </div>
           )}
         </div>
@@ -220,12 +222,12 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <TrendingUp className="w-5 h-5 text-[#2d9f6f]" />
-                <span className="text-sm font-semibold text-[#2d9f6f] uppercase tracking-wider">Popular</span>
+                <span className="text-sm font-semibold text-[#2d9f6f] uppercase tracking-wider">{t('home.popular')}</span>
               </div>
-              <h2 className="text-3xl font-bold text-[#2d3436]" style={{ fontFamily: 'var(--font-serif)' }}>Trending Now</h2>
+              <h2 className="text-3xl font-bold text-[#2d3436]" style={{ fontFamily: 'var(--font-serif)' }}>{t('home.trendingNow')}</h2>
             </div>
             <Link href="/products?sort=-sales.count" className="text-[#c2703e] hover:text-[#a85a30] font-medium flex items-center gap-1 group">
-              View All
+              {t('common.viewAll')}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -238,7 +240,7 @@ export default function HomePage() {
           ) : !isLoading ? (
             <div className="text-center py-12 text-[#6b5e54]">
               <TrendingUp className="w-12 h-12 mx-auto mb-4 text-[#f0ebe4]" />
-              <p>No trending products available yet</p>
+              <p>{t('home.noTrendingProducts')}</p>
             </div>
           ) : null}
         </div>
@@ -266,16 +268,16 @@ export default function HomePage() {
             <div>
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 mb-6 border border-white/10">
                 <Sparkles className="w-4 h-4 text-[#daa520]" />
-                <span className="text-sm font-medium text-white/80 tracking-wide">For Artisans</span>
+                <span className="text-sm font-medium text-white/80 tracking-wide">{t('home.forArtisans')}</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-white" style={{ fontFamily: 'var(--font-serif)' }}>
-                Start Your KalaKriti Journey
+                {t('home.ctaTitle')}
               </h2>
               <p className="text-xl mb-8 text-white/60 leading-relaxed font-light">
-                Join thousands of artisans selling their unique creations to buyers worldwide. Set up your shop in minutes and start earning today.
+                {t('home.ctaSubtitle')}
               </p>
               <ul className="space-y-4 mb-8">
-                {['Easy setup in 5 minutes', 'Low commission fees', 'Dedicated seller support', 'Global marketplace reach'].map((benefit) => (
+                {[t('home.ctaBenefit1'), t('home.ctaBenefit2'), t('home.ctaBenefit3'), t('home.ctaBenefit4')].map((benefit) => (
                   <li key={benefit} className="flex items-center gap-3 text-white/70">
                     <div className="w-6 h-6 rounded-full bg-[#2d9f6f]/20 flex items-center justify-center flex-shrink-0">
                       <svg className="w-4 h-4 text-[#2d9f6f]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -288,7 +290,7 @@ export default function HomePage() {
               </ul>
               <Link href="/register">
                 <Button size="lg" className="bg-white text-[#c2703e] hover:bg-[#faf6f1] shadow-xl text-base font-semibold px-10 border-0">
-                  Open Your Shop Today
+                  {t('home.openShop')}
                   <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
@@ -297,10 +299,10 @@ export default function HomePage() {
             {/* Right side - Stats */}
             <div className="grid grid-cols-2 gap-6">
               {[
-                { value: '2,500+', label: 'Active Sellers' },
-                { value: '50K+', label: 'Happy Customers' },
-                { value: '$2M+', label: 'Total Sales' },
-                { value: '4.9/5', label: 'Average Rating' },
+                { value: '2,500+', label: t('home.activeSellers') },
+                { value: '50K+', label: t('home.happyCustomers') },
+                { value: '$2M+', label: t('home.totalSales') },
+                { value: '4.9/5', label: t('home.averageRating') },
               ].map((stat, index) => (
                 <div
                   key={stat.label}

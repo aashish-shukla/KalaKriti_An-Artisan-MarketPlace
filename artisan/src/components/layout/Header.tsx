@@ -10,6 +10,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import { useCartStore } from '@/lib/store/cartStore';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from '@/lib/i18n';
 
 export function Header() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -70,8 +72,8 @@ export function Header() {
             {/* Desktop Nav Links */}
             <nav className="hidden lg:flex items-center gap-1">
               {[
-                { label: 'Products', href: '/products', icon: Package },
-                { label: 'Explore', href: '/products?featured=true', icon: Compass },
+                { label: t('nav.products'), href: '/products', icon: Package },
+                { label: t('nav.explore'), href: '/products?featured=true', icon: Compass },
               ].map((item) => (
                 <Link
                   key={item.label}
@@ -139,7 +141,7 @@ export function Header() {
                             className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#c2703e]/5 transition-colors text-[#6b5e54] hover:text-[#c2703e]"
                           >
                             <User className="w-4 h-4" />
-                            <span className="text-sm font-medium">My Account</span>
+                            <span className="text-sm font-medium">{t('nav.myAccount')}</span>
                           </Link>
 
                           <Link
@@ -148,7 +150,7 @@ export function Header() {
                             className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#c2703e]/5 transition-colors text-[#6b5e54] hover:text-[#c2703e]"
                           >
                             <Package className="w-4 h-4" />
-                            <span className="text-sm font-medium">Orders</span>
+                            <span className="text-sm font-medium">{t('nav.orders')}</span>
                           </Link>
 
                           <Link
@@ -157,7 +159,7 @@ export function Header() {
                             className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#c2703e]/5 transition-colors text-[#6b5e54] hover:text-[#c2703e]"
                           >
                             <Heart className="w-4 h-4" />
-                            <span className="text-sm font-medium">Wishlist</span>
+                            <span className="text-sm font-medium">{t('nav.wishlist')}</span>
                           </Link>
                         </div>
 
@@ -170,7 +172,7 @@ export function Header() {
                               className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#c2703e]/5 transition-colors text-[#6b5e54] hover:text-[#c2703e]"
                             >
                               <Settings className="w-4 h-4" />
-                              <span className="text-sm font-medium">Seller Dashboard</span>
+                              <span className="text-sm font-medium">{t('nav.sellerDashboard')}</span>
                             </Link>
                           </>
                         )}
@@ -184,7 +186,7 @@ export function Header() {
                               className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#c2703e]/5 transition-colors text-[#6b5e54] hover:text-[#c2703e]"
                             >
                               <Settings className="w-4 h-4" />
-                              <span className="text-sm font-medium">Admin Dashboard</span>
+                              <span className="text-sm font-medium">{t('nav.adminDashboard')}</span>
                             </Link>
                           </>
                         )}
@@ -196,7 +198,7 @@ export function Header() {
                           className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 transition-colors text-[#c0392b]"
                         >
                           <LogOut className="w-4 h-4" />
-                          <span className="text-sm font-medium">Logout</span>
+                          <span className="text-sm font-medium">{t('nav.logout')}</span>
                         </button>
                       </div>
                     )}
@@ -208,14 +210,14 @@ export function Header() {
                     href="/login"
                     className="px-4 py-2 text-[#6b5e54] hover:text-[#c2703e] font-medium transition-colors rounded-lg hover:bg-[#c2703e]/5"
                   >
-                    Login
+                    {t('nav.login')}
                   </Link>
                   <Link
                     href="/register"
                     className="px-5 py-2 text-white rounded-xl font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
                     style={{ background: 'var(--gradient-primary)' }}
                   >
-                    Sign Up
+                    {t('nav.signUp')}
                   </Link>
                 </div>
               )}

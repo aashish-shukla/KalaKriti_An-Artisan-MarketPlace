@@ -6,11 +6,13 @@ import { Mail, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import toast from 'react-hot-toast';
+import { useTranslation } from '@/lib/i18n';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ export function Newsletter() {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     setIsSubscribed(true);
-    toast.success('Successfully subscribed to our newsletter!');
+    toast.success(t('home.newsletterSuccess'));
     setIsSubmitting(false);
     setEmail('');
 
@@ -52,15 +54,15 @@ export function Newsletter() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/10">
           <Sparkles className="w-4 h-4 text-[#f0c75e]" />
-          <span className="text-sm font-medium text-white/90">Stay Updated</span>
+          <span className="text-sm font-medium text-white/90">{t('home.newsletterTitle')}</span>
         </div>
 
         {/* Heading */}
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white" style={{ fontFamily: 'var(--font-serif)' }}>
-          Never Miss a Masterpiece
+          {t('home.newsletterTitle')}
         </h2>
         <p className="text-xl text-white/75 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-          Subscribe to our newsletter for exclusive offers, artisan stories, and the latest handcrafted collections
+          {t('home.newsletterSubtitle')}
         </p>
 
         {/* Form */}
@@ -69,7 +71,7 @@ export function Newsletter() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('home.newsletterPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/50 focus:bg-white/20 focus:border-white"
@@ -81,11 +83,11 @@ export function Newsletter() {
                 isLoading={isSubmitting}
                 className="bg-white text-[#c2703e] hover:bg-[#faf6f1] shadow-xl hover:shadow-2xl border-0"
               >
-                Subscribe
+                {t('home.newsletterButton')}
               </Button>
             </div>
             <p className="text-sm text-white/50 mt-4">
-              Join 10,000+ subscribers. Unsubscribe anytime.
+              {t('home.newsletterDisclaimer')}
             </p>
           </form>
         ) : (

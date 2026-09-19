@@ -3,6 +3,7 @@
 
 import { Star, Quote } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from '@/lib/i18n';
 
 const testimonials = [
   {
@@ -41,6 +42,7 @@ const testimonials = [
 
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,13 +62,13 @@ export function Testimonials() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-[#daa520]/10 rounded-full px-4 py-2 mb-4">
             <Star className="w-4 h-4 text-[#daa520] fill-[#daa520]" />
-            <span className="text-sm font-semibold text-[#daa520] uppercase tracking-wider">Testimonials</span>
+            <span className="text-sm font-semibold text-[#daa520] uppercase tracking-wider">{t('home.testimonials')}</span>
           </div>
           <h2 className="text-4xl font-bold text-[#2d3436] mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
-            Loved by Artisans & Buyers
+            {t('home.testimonials')}
           </h2>
           <p className="text-xl text-[#6b5e54] max-w-2xl mx-auto">
-            Thousands of people trust our marketplace for unique, handcrafted treasures
+            {t('home.testimonialsDesc')}
           </p>
         </div>
 

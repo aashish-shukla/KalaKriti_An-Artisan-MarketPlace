@@ -47,6 +47,28 @@ export interface Shop {
     totalOrders: number;
     totalRevenue: number;
   };
+  contactInfo?: {
+    email?: string;
+    phone?: string;
+    website?: string;
+  };
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+    country?: string;
+  };
+  policies?: {
+    returnPolicy?: string;
+    shippingPolicy?: string;
+  };
+  socialMedia?: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+    youtube?: string;
+  };
   isVerified: boolean;
   createdAt: string;
   updatedAt: string;

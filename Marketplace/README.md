@@ -46,8 +46,11 @@ nano .env
 
 **Required Environment Variables:**
 - `MONGODB_URI` - Your MongoDB connection string
+- `MONGODB_URI_LOCAL` - Optional local fallback URI for development, defaults to `mongodb://127.0.0.1:27017/artisan-marketplace`
 - `JWT_SECRET` - Strong secret key for JWT (use a long random string)
 - `JWT_REFRESH_SECRET` - Secret key for refresh tokens
+
+If the primary MongoDB URI is unavailable during development, the server will try the local fallback URI before giving up.
 
 Optional variables for full functionality:
 - Email configuration (SMTP)

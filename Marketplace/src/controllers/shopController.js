@@ -74,6 +74,7 @@ exports.createShop = async (req, res, next) => {
     const shop = await Shop.create({
       ...req.body,
       owner: user._id,
+      status: SHOP_STATUS.ACTIVE,
     });
     
     user.shop = shop._id;
